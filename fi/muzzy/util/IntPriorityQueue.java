@@ -1,5 +1,6 @@
+package fi.muzzy.util;
 
-class IntPriorityQueue extends cern.colt.list.IntArrayList {
+public class IntPriorityQueue extends cern.colt.list.IntArrayList {
 
 	// One entry for value, one for score
 			

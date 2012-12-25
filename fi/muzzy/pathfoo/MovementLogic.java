@@ -1,6 +1,8 @@
+package fi.muzzy.pathfoo;
+
 import cern.colt.list.IntArrayList;
 
-class MovementLogic implements MovementLogicInterface {
+public class MovementLogic implements MovementLogicInterface {
 	MovementMap map;
 	int width, height, depth;
 

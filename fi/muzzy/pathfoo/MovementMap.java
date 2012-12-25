@@ -1,11 +1,12 @@
-import java.util.SortedSet;
-import java.util.Set;
-import java.util.*;
+package fi.muzzy.pathfoo;
+
 import cern.colt.map.OpenIntIntHashMap;
 import cern.colt.list.IntArrayList;
 import cern.colt.bitvector.BitVector;
 
-class MovementMap {
+import fi.muzzy.util.IntPriorityQueue;
+
+public class MovementMap {
 	public static final byte WALKABLE = 1;
 	public static final byte ROAD = 2;
 	

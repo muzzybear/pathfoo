@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 import java.util.Arrays;
 import java.util.List;
 
+import fi.muzzy.pathfoo.*;
+
 public class test {
 
 	public static void main(String[] params) {
