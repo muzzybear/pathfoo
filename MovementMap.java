@@ -48,7 +48,7 @@ class MovementMap {
 	
 	/** findPath performs A* pathfinding based on given MovementLogic class */
 	
-	public int[] findPath(MovementLogic logic, int x1, int y1, int z1, int x2, int y2, int z2) {
+	public int[] findPath(MovementLogicInterface logic, int x1, int y1, int z1, int x2, int y2, int z2) {
 		int startIdx = x1 + y1*width + z1*width*height;
 		int endIdx = x2 + y2*width + z2*width*height;
 		if (startIdx == endIdx) {

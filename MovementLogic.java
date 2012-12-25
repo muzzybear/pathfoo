@@ -1,6 +1,6 @@
 import cern.colt.list.IntArrayList;
 
-class MovementLogic {
+class MovementLogic implements MovementLogicInterface {
 	MovementMap map;
 	int width, height, depth;
 
