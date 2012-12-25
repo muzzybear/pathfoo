@@ -64,7 +64,7 @@ class MovementMap {
 		BitVector openVec = new BitVector(width*height*depth);
 				
 		OpenIntIntHashMap cameFrom = new OpenIntIntHashMap();
-		open.queue(startIdx, logic.heuristic(startIdx, endIdx));
+		open.queue(startIdx, logic.heuristic(startIdx, startIdx, endIdx));
 		openVec.set(startIdx);
 		OpenIntIntHashMap gScore = new OpenIntIntHashMap(); // cost from beginning to idx
 		int tmp_counter = 0;
@@ -97,13 +97,13 @@ class MovementMap {
 				if (closed.getQuick(neighbor))
 					continue;
 				int tmpG = gScore.get(current) + logic.distance(current, neighbor); 
-				// if neighbor not in openset OR tmpG <= gScore[neighbor]
-				if (!openVec.getQuick(neighbor) || tmpG <= gScore.get(neighbor))
+				// if neighbor not in openset OR tmpG < gScore[neighbor]
+				// disregard new paths with equal score, first one of same length wins to allow heuristic to choose prettiest path
+				if (!openVec.getQuick(neighbor) || tmpG < gScore.get(neighbor))
 				{
 					cameFrom.put(neighbor, current);
 					gScore.put(neighbor, tmpG);
-					//fScore.put(neighbor, tmpG + heuristic(neighbor, endIdx));
-					int score = tmpG + logic.heuristic(neighbor, endIdx);
+					int score = tmpG + logic.heuristic(startIdx, neighbor, endIdx);
 					
 					// if neighbor not in openset THEN add neighbor to openset
 					if (!openVec.getQuick(neighbor)) {

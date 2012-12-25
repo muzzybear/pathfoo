@@ -14,29 +14,34 @@ class MovementLogic {
 	// Expected maximum path length used as multiplier for tiebreaking purposes
 	private final static int maxPath = 10000;
 
-	public int heuristic(int idx1, int idx2) {
-		int x1 = idx1%width;
-		int y1 = idx1%(width*height)/width;
-		int z1 = idx1/(width*height);
-		int x2 = idx2%width;
-		int y2 = idx2%(width*height)/width;
-		int z2 = idx2/(width*height);
+	public int heuristic(int start, int current, int end) {
+		int x0 = start%width;
+		int y0 = start%(width*height)/width;
+		int z0 = start/(width*height);
+		int x1 = current%width;
+		int y1 = current%(width*height)/width;
+		int z1 = current/(width*height);
+		int x2 = end%width;
+		int y2 = end%(width*height)/width;
+		int z2 = end/(width*height);
+		
 		int dx = Math.abs(x2-x1);
 		int dy = Math.abs(y2-y1);
 		int dz = Math.abs(z2-z1);
 		// diagonal distance
 		int h1 = Math.max(Math.max(dx, dy), dz);
-		int h = (5 * h1);
-		// add tiebreaker
-		return h * maxPath + h1;
+		int h2 = Math.abs( (x1-x2)*(y0-y2) - (x0-x2)*(y1-y2) );
+		int h = (55 * h1);
+		// add tiebreaker, prefers straight paths
+		return h * maxPath + h2*maxPath/(width*height);
 	}
 
 	public int distance(int idx1, int idx2) {
 		// prefer stepping into road tiles
 		if ((map.getFlags(idx2) & MovementMap.ROAD) != 0) {
-			return 5*maxPath;
+			return 55*maxPath;
 		} else {
-			return 10*maxPath;
+			return 100*maxPath;
 		}
 	}
 
